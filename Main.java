@@ -38,28 +38,27 @@ public class Main {
 
     // Method to translate a number into Korean
     public static String getKoreanNumber(int number) {
-        // Array of Korean numbers
+        // Array of Korean numbers from 0 to 9
         String[] koreanNumbers = {"", "일", "이", "삼", "사", "오", "육", "칠", "팔", "구"};
-        // Array of Korean tens
+        // Array of Korean tens, like 10, 20, 30, etc
         String[] koreanTens = {"", "십", "백", "천"};
-        // Array of Korean big numbers
+        // Array of Korean big numbers, like 10k, 100M, 1B
         String[] koreanBigNumbers = {"", "만", "억", "조", "경"};
         int count = 0;
         String koreanNumber = "";
-        // Recursively translate large numbers
-        if (number >= 10000) {
-            koreanNumber = getKoreanNumber(number / 10000) + koreanBigNumbers[++count];
-            number = number % 10000;
-        }
-        // Translate the rest of the number
+        // loop through the number
         while (number > 0) {
+            // get the last digit of the number
             int n = number % 10;
+            // check if the last digit is not zero
             if (n != 0) {
+                // add the corresponding number in the koreanNumbers array
                 koreanNumber = koreanNumbers[n] + koreanTens[count % 4] + koreanNumber;
             }
             count++;
             number /= 10;
         }
+        // return the korean number
         return koreanNumber;
     }
 }
